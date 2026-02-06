@@ -200,6 +200,10 @@ body {
    MOBILE UX
 ================================ */
 @media (max-width: 80wv) {
+  .comic-stack {
+  height: 85vh;
+}
+
   body {
     align-items: flex-start;
     padding-top: 16px;
