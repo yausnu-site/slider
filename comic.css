@@ -12,12 +12,12 @@
 ================================ */
 body {
   margin: 0;
-  background: #d6d6d2; /* нейтральная галерея */
+  background: #d6d6d2; /* спокойный галерейный серый */
   min-height: 100vh;
 
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; /* ⬅️ ЦЕНТРИРУЕМ КАРТОЧКУ ПО ЭКРАНУ */
 
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
@@ -29,7 +29,7 @@ body {
 ================================ */
 .comic {
   width: 100%;
-  max-width: 480px; /* десктоп — аккуратный размер */
+  max-width: 520px; /* десктоп — комфортный размер */
 }
 
 /* ================================
@@ -40,16 +40,16 @@ body {
 }
 
 /* ================================
-   STACK (КЛЮЧЕВОЕ МЕСТО)
+   STACK — ОСНОВНОЙ КОНТРОЛЛЕР РАЗМЕРА
 ================================ */
 .comic-stack {
   position: relative;
-  width: 100%;
-  height: 85vh;              /* 🔴 ГЛАВНЫЙ КОНТРОЛЛЕР РАЗМЕРА */
-  max-height: 720px;         /* чтобы на десктопе не разрасталось */
-  aspect-ratio: 2 / 3;
 
-  cursor: pointer;
+  width: 100%;
+  height: 86vh;          /* ⬅️ ВОТ ГЛАВНАЯ СТРОКА */
+  max-height: 760px;     /* потолок на больших экранах */
+
+  aspect-ratio: 2 / 3;
 }
 
 /* ================================
@@ -66,7 +66,7 @@ body {
   border-radius: 12px;
   background: #eee;
 
-  /* ОДНА МЯГКАЯ ТЕНЬ */
+  /* ОДНА ЛЁГКАЯ ТЕНЬ */
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
 
   opacity: 0;
@@ -130,12 +130,11 @@ body {
    COVER
 ================================ */
 .page.cover {
-  /* та же тень, но чуть плотнее */
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.22);
 }
 
 /* ================================
-   UI OVERLAY
+   UI OVERLAY (КНОПКИ)
 ================================ */
 .comic-ui {
   position: absolute;
@@ -144,7 +143,7 @@ body {
 }
 
 /* ================================
-   NAV BUTTONS (ПО БОКАМ)
+   NAV BUTTONS — ПО БОКАМ КАРТОЧКИ
 ================================ */
 .nav {
   position: absolute;
@@ -153,14 +152,14 @@ body {
 
   pointer-events: auto;
 
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.9);
   border: none;
   color: #111;
 
-  padding: 16px 36px;        /* ШИРОКИЕ */
+  padding: 18px 40px;   /* ШИРОКИЕ КНОПКИ */
   border-radius: 999px;
 
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 800;
 
   cursor: pointer;
@@ -185,64 +184,47 @@ body {
 }
 
 .nav.prev {
-  left: -26px;
+  left: -28px;
 }
 
 .nav.next {
-  right: -26px;
+  right: -28px;
 }
 
 /* ================================
-   COUNTER
+   COUNTER — БОЛЬШОЙ И ЧИТАЕМЫЙ
 ================================ */
 .counter {
-  position: absolute;
-  bottom: -52px;
-  left: 50%;
-  transform: translateX(-50%);
+  margin-top: 22px;
+  text-align: center;
 
-  font-size: 20px;     /* БОЛЬШЕ */
-  font-weight: 800;    /* ЖИРНЕЕ */
-  letter-spacing: 0.14em;
+  font-size: 28px;     /* ⬅️ СИЛЬНО БОЛЬШЕ */
+  font-weight: 900;    /* ⬅️ СИЛЬНО ЖИРНЕЕ */
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 
   opacity: 0.75;
 }
 
 /* ================================
-   MOBILE (FULL EXPERIENCE)
+   RESPONSIVE — АДЕКВАТНЫЙ BREAKPOINT
 ================================ */
-@media (max-width: 600px) {
-  body {
-    align-items: flex-start;
-    padding-top: 12px;
-  }
-
+@media (max-width: 900px) {
   .comic {
-    width: 100vw;
-    max-width: none;
+    max-width: 100vw;
   }
 
   .comic-stack {
-    height: 92vh;      /* 🔴 МОБИЛКА = ПОЧТИ ФУЛЛСКРИН */
+    height: 92vh;      /* мобилка / планшеты */
     max-height: none;
   }
 
   .nav {
-    padding: 20px 42px;
+    padding: 20px 44px;
     font-size: 26px;
   }
 
-  .nav.prev {
-    left: -14px;
-  }
-
-  .nav.next {
-    right: -14px;
-  }
-
   .counter {
-    font-size: 22px;
-    bottom: -60px;
+    font-size: 32px;   /* ⬅️ ЕЩЁ КРУПНЕЕ НА МОБИЛКЕ */
   }
 }
