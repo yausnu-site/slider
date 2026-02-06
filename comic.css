@@ -12,12 +12,12 @@
 ================================ */
 body {
   margin: 0;
-  background: #d6d6d2; /* спокойный галерейный серый */
+  background: #d6d6d2;
   min-height: 100vh;
 
   display: flex;
   justify-content: center;
-  align-items: center; /* ⬅️ ЦЕНТРИРУЕМ КАРТОЧКУ ПО ЭКРАНУ */
+  align-items: center;
 
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
@@ -29,7 +29,7 @@ body {
 ================================ */
 .comic {
   width: 100%;
-  max-width: 520px; /* десктоп — комфортный размер */
+  max-width: 560px; /* комфортный desktop-объект */
 }
 
 /* ================================
@@ -40,16 +40,21 @@ body {
 }
 
 /* ================================
-   STACK — ОСНОВНОЙ КОНТРОЛЛЕР РАЗМЕРА
+   STACK — РАЗМЕР И ПРОПОРЦИИ
+   (1200 × 1800 → 2 / 3)
 ================================ */
 .comic-stack {
   position: relative;
 
   width: 100%;
-  height: 86vh;          /* ⬅️ ВОТ ГЛАВНАЯ СТРОКА */
-  max-height: 760px;     /* потолок на больших экранах */
+  height: 84vh;          /* основной контроль */
+  max-height: 780px;     /* потолок desktop */
 
-  aspect-ratio: 2 / 3;
+  aspect-ratio: 2 / 3;  /* 🔒 ЖЁСТКО ПОД ИЗОБРАЖЕНИЯ */
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* ================================
@@ -66,8 +71,8 @@ body {
   border-radius: 12px;
   background: #eee;
 
-  /* ОДНА ЛЁГКАЯ ТЕНЬ */
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
+  /* одна тихая тень */
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.16);
 
   opacity: 0;
   pointer-events: none;
@@ -86,7 +91,7 @@ body {
   border-radius: inherit;
 
   background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.028'/%3E%3C/svg%3E");
   mix-blend-mode: overlay;
 }
 
@@ -102,7 +107,7 @@ body {
 
   background: radial-gradient(
     ellipse at center,
-    rgba(0, 0, 0, 0) 62%,
+    rgba(0, 0, 0, 0) 64%,
     rgba(0, 0, 0, 0.22) 100%
   );
 }
@@ -117,8 +122,8 @@ body {
 }
 
 .page.behind {
-  opacity: 0.06;
-  transform: translateX(4px) scale(0.99);
+  opacity: 0.05;
+  transform: translateX(3px) scale(0.992);
   z-index: 1;
 }
 
@@ -130,11 +135,11 @@ body {
    COVER
 ================================ */
 .page.cover {
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.22);
+  box-shadow: 0 7px 16px rgba(0, 0, 0, 0.2);
 }
 
 /* ================================
-   UI OVERLAY (КНОПКИ)
+   UI OVERLAY
 ================================ */
 .comic-ui {
   position: absolute;
@@ -143,7 +148,7 @@ body {
 }
 
 /* ================================
-   NAV BUTTONS — ПО БОКАМ КАРТОЧКИ
+   NAV BUTTONS — ПО БОКАМ
 ================================ */
 .nav {
   position: absolute;
@@ -152,15 +157,15 @@ body {
 
   pointer-events: auto;
 
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.92);
   border: none;
   color: #111;
 
-  padding: 18px 40px;   /* ШИРОКИЕ КНОПКИ */
+  padding: 20px 44px;
   border-radius: 999px;
 
-  font-size: 24px;
-  font-weight: 800;
+  font-size: 26px;
+  font-weight: 900;
 
   cursor: pointer;
 
@@ -171,7 +176,7 @@ body {
 }
 
 .nav:hover:not(:disabled) {
-  background: #fff;
+  background: #ffffff;
 }
 
 .nav:active:not(:disabled) {
@@ -184,47 +189,47 @@ body {
 }
 
 .nav.prev {
-  left: -28px;
+  left: -32px;
 }
 
 .nav.next {
-  right: -28px;
+  right: -32px;
 }
 
 /* ================================
-   COUNTER — БОЛЬШОЙ И ЧИТАЕМЫЙ
+   COUNTER — КРУПНЫЙ, ЯСНЫЙ
 ================================ */
 .counter {
-  margin-top: 22px;
+  margin-top: 26px;
   text-align: center;
 
-  font-size: 28px;     /* ⬅️ СИЛЬНО БОЛЬШЕ */
-  font-weight: 900;    /* ⬅️ СИЛЬНО ЖИРНЕЕ */
-  letter-spacing: 0.16em;
+  font-size: 32px;      /* ⬅️ ЕЩЁ БОЛЬШЕ */
+  font-weight: 900;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
 
   opacity: 0.75;
 }
 
 /* ================================
-   RESPONSIVE — АДЕКВАТНЫЙ BREAKPOINT
+   RESPONSIVE — БОЛЬШОЙ BREAKPOINT
 ================================ */
-@media (max-width: 900px) {
+@media (max-width: 1200px) {
   .comic {
     max-width: 100vw;
   }
 
   .comic-stack {
-    height: 92vh;      /* мобилка / планшеты */
+    height: 92vh;
     max-height: none;
   }
 
   .nav {
-    padding: 20px 44px;
-    font-size: 26px;
+    padding: 22px 48px;
+    font-size: 28px;
   }
 
   .counter {
-    font-size: 32px;   /* ⬅️ ЕЩЁ КРУПНЕЕ НА МОБИЛКЕ */
+    font-size: 36px;
   }
 }
