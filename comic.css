@@ -1,5 +1,5 @@
 /* ================================
-   BASE RESET
+   RESET
 ================================ */
 *,
 *::before,
@@ -8,15 +8,17 @@
 }
 
 /* ================================
-   PAGE
+   PAGE / BACKGROUND
 ================================ */
 body {
   margin: 0;
-  background: #d6d6d2; /* нейтральный серый */
+  background: #d6d6d2; /* нейтральная галерея */
   min-height: 100vh;
+
   display: flex;
   justify-content: center;
   align-items: center;
+
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
   color: #111;
@@ -27,8 +29,7 @@ body {
 ================================ */
 .comic {
   width: 100%;
-  max-width: 480px; /* ДЕСКТОП — ОСТАЁТСЯ */
-  margin-inline: auto;
+  max-width: 480px; /* десктоп — аккуратный размер */
 }
 
 /* ================================
@@ -39,12 +40,16 @@ body {
 }
 
 /* ================================
-   STACK
+   STACK (КЛЮЧЕВОЕ МЕСТО)
 ================================ */
 .comic-stack {
   position: relative;
   width: 100%;
+  height: 85vh;              /* 🔴 ГЛАВНЫЙ КОНТРОЛЛЕР РАЗМЕРА */
+  max-height: 720px;         /* чтобы на десктопе не разрасталось */
   aspect-ratio: 2 / 3;
+
+  cursor: pointer;
 }
 
 /* ================================
@@ -61,8 +66,8 @@ body {
   border-radius: 12px;
   background: #eee;
 
-  /* ОДНА ЛЁГКАЯ ТЕНЬ */
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+  /* ОДНА МЯГКАЯ ТЕНЬ */
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
 
   opacity: 0;
   pointer-events: none;
@@ -81,7 +86,7 @@ body {
   border-radius: inherit;
 
   background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
   mix-blend-mode: overlay;
 }
 
@@ -97,8 +102,8 @@ body {
 
   background: radial-gradient(
     ellipse at center,
-    rgba(0, 0, 0, 0) 60%,
-    rgba(0, 0, 0, 0.25) 100%
+    rgba(0, 0, 0, 0) 62%,
+    rgba(0, 0, 0, 0.22) 100%
   );
 }
 
@@ -112,13 +117,21 @@ body {
 }
 
 .page.behind {
-  opacity: 0.08;
-  transform: translateX(6px) scale(0.985);
+  opacity: 0.06;
+  transform: translateX(4px) scale(0.99);
   z-index: 1;
 }
 
 .page.animating {
   z-index: 3;
+}
+
+/* ================================
+   COVER
+================================ */
+.page.cover {
+  /* та же тень, но чуть плотнее */
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.22);
 }
 
 /* ================================
@@ -131,7 +144,7 @@ body {
 }
 
 /* ================================
-   NAV BUTTONS (SIDES)
+   NAV BUTTONS (ПО БОКАМ)
 ================================ */
 .nav {
   position: absolute;
@@ -140,15 +153,15 @@ body {
 
   pointer-events: auto;
 
-  background: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.85);
   border: none;
   color: #111;
 
-  padding: 14px 28px; /* ШИРЕ */
+  padding: 16px 36px;        /* ШИРОКИЕ */
   border-radius: 999px;
 
   font-size: 22px;
-  font-weight: 700;
+  font-weight: 800;
 
   cursor: pointer;
 
@@ -159,11 +172,11 @@ body {
 }
 
 .nav:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.95);
+  background: #fff;
 }
 
 .nav:active:not(:disabled) {
-  transform: translateY(-50%) scale(0.97);
+  transform: translateY(-50%) scale(0.96);
 }
 
 .nav:disabled {
@@ -172,11 +185,11 @@ body {
 }
 
 .nav.prev {
-  left: -22px;
+  left: -26px;
 }
 
 .nav.next {
-  right: -22px;
+  right: -26px;
 }
 
 /* ================================
@@ -184,50 +197,52 @@ body {
 ================================ */
 .counter {
   position: absolute;
-  bottom: -44px;
+  bottom: -52px;
   left: 50%;
   transform: translateX(-50%);
 
-  font-size: 18px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
+  font-size: 20px;     /* БОЛЬШЕ */
+  font-weight: 800;    /* ЖИРНЕЕ */
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 
   opacity: 0.75;
 }
 
 /* ================================
-   MOBILE UX
+   MOBILE (FULL EXPERIENCE)
 ================================ */
-@media (max-width: 80wv) {
-  .comic-stack {
-  height: 85vh;
-}
-
+@media (max-width: 600px) {
   body {
     align-items: flex-start;
-    padding-top: 16px;
+    padding-top: 12px;
   }
 
   .comic {
-    max-width: 98vw; /* ЕЩЁ БОЛЬШЕ КАРТИНКА */
+    width: 100vw;
+    max-width: none;
+  }
+
+  .comic-stack {
+    height: 92vh;      /* 🔴 МОБИЛКА = ПОЧТИ ФУЛЛСКРИН */
+    max-height: none;
   }
 
   .nav {
-    padding: 18px 34px;
-    font-size: 24px;
+    padding: 20px 42px;
+    font-size: 26px;
   }
 
   .nav.prev {
-    left: -10px;
+    left: -14px;
   }
 
   .nav.next {
-    right: -10px;
+    right: -14px;
   }
 
   .counter {
-    font-size: 20px;
-    bottom: -52px;
+    font-size: 22px;
+    bottom: -60px;
   }
 }
