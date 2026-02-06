@@ -77,6 +77,38 @@ body {
 }
 
 /* ================================
+   PAPER GRAIN
+================================ */
+.page::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+/* ================================
+   VIGNETTE
+================================ */
+.page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0) 55%,
+    rgba(0, 0, 0, 0.35) 100%
+  );
+}
+
+/* ================================
    ACTIVE PAGE
 ================================ */
 .page.active {
@@ -114,7 +146,7 @@ body {
    UI CONTROLS
 ================================ */
 .comic-ui {
-  margin-top: 14px;
+  margin-top: 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -124,12 +156,12 @@ body {
    NAV BUTTONS
 ================================ */
 .nav {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.35);
   color: #fff;
 
-  padding: 6px 14px;
-  border-radius: 8px;
+  padding: 8px 18px;
+  border-radius: 10px;
 
   font-size: 18px;
   line-height: 1;
@@ -140,12 +172,18 @@ body {
   transition:
     background 0.25s ease,
     border-color 0.25s ease,
+    transform 0.15s ease,
     opacity 0.25s ease;
 }
 
 .nav:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.6);
+  transform: translateY(-1px);
+}
+
+.nav:active:not(:disabled) {
+  transform: translateY(0);
 }
 
 .nav:disabled {
@@ -157,22 +195,37 @@ body {
    COUNTER
 ================================ */
 .counter {
-  font-size: 13px;
+  font-size: 14px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  opacity: 0.7;
+  opacity: 0.75;
 }
 
 /* ================================
-   RESPONSIVE
+   MOBILE UX
 ================================ */
-@media (max-width: 520px) {
+@media (max-width: 600px) {
+  body {
+    align-items: flex-start;
+    padding-top: 24px;
+  }
+
   .comic {
-    max-width: 90vw;
+    max-width: 94vw; /* БОЛЬШЕ КАРТИНКА */
+  }
+
+  .comic-ui {
+    margin-top: 18px;
   }
 
   .nav {
-    padding: 6px 10px;
-    font-size: 16px;
+    padding: 12px 22px; /* БОЛЬШЕ КНОПКИ */
+    font-size: 20px;
+    border-radius: 12px;
+  }
+
+  .counter {
+    font-size: 16px; /* БОЛЬШЕ ЦИФРЫ */
+    letter-spacing: 0.1em;
   }
 }
