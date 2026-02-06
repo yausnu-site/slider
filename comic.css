@@ -199,7 +199,7 @@ body {
 /* ================================
    MOBILE UX
 ================================ */
-@media (max-width: 600px) {
+@media (max-width: 80wv) {
   body {
     align-items: flex-start;
     padding-top: 16px;
