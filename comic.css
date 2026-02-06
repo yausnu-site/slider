@@ -8,12 +8,13 @@
 }
 
 /* ================================
-   PAGE / BACKGROUND
+   PAGE
 ================================ */
 body {
   margin: 0;
-  background: #d6d6d2;
   min-height: 100vh;
+
+  background: #d6d6d2;
 
   display: flex;
   justify-content: center;
@@ -29,7 +30,7 @@ body {
 ================================ */
 .comic {
   width: 100%;
-  max-width: 560px; /* комфортный desktop-объект */
+  max-width: 560px; /* ⬅️ ГЛАВНЫЙ КОНТРОЛЛЕР РАЗМЕРА */
 }
 
 /* ================================
@@ -40,25 +41,16 @@ body {
 }
 
 /* ================================
-   STACK — РАЗМЕР И ПРОПОРЦИИ
-   (1200 × 1800 → 2 / 3)
+   STACK — ТОЛЬКО ШИРИНА + RATIO
 ================================ */
 .comic-stack {
   position: relative;
-
   width: 100%;
-  height: 84vh;          /* основной контроль */
-  max-height: 780px;     /* потолок desktop */
-
-  aspect-ratio: 2 / 3;  /* 🔒 ЖЁСТКО ПОД ИЗОБРАЖЕНИЯ */
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  aspect-ratio: 2 / 3; /* 1200 × 1800 — НЕ ЛОМАЕМ */
 }
 
 /* ================================
-   PAGE BASE
+   PAGE
 ================================ */
 .page {
   position: absolute;
@@ -66,13 +58,13 @@ body {
 
   width: 100%;
   height: 100%;
+
   object-fit: cover;
 
   border-radius: 12px;
   background: #eee;
 
-  /* одна тихая тень */
-  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.16);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.16);
 
   opacity: 0;
   pointer-events: none;
@@ -91,7 +83,7 @@ body {
   border-radius: inherit;
 
   background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.028'/%3E%3C/svg%3E");
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
   mix-blend-mode: overlay;
 }
 
@@ -107,7 +99,7 @@ body {
 
   background: radial-gradient(
     ellipse at center,
-    rgba(0, 0, 0, 0) 64%,
+    rgba(0, 0, 0, 0) 65%,
     rgba(0, 0, 0, 0.22) 100%
   );
 }
@@ -123,7 +115,7 @@ body {
 
 .page.behind {
   opacity: 0.05;
-  transform: translateX(3px) scale(0.992);
+  transform: translateX(3px) scale(0.99);
   z-index: 1;
 }
 
@@ -131,11 +123,8 @@ body {
   z-index: 3;
 }
 
-/* ================================
-   COVER
-================================ */
 .page.cover {
-  box-shadow: 0 7px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
 }
 
 /* ================================
@@ -148,7 +137,7 @@ body {
 }
 
 /* ================================
-   NAV BUTTONS — ПО БОКАМ
+   NAV BUTTONS
 ================================ */
 .nav {
   position: absolute;
@@ -157,56 +146,35 @@ body {
 
   pointer-events: auto;
 
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.9);
   border: none;
-  color: #111;
 
-  padding: 20px 44px;
+  padding: 18px 40px;
   border-radius: 999px;
 
-  font-size: 26px;
+  font-size: 24px;
   font-weight: 900;
 
   cursor: pointer;
-
-  transition:
-    background 0.2s ease,
-    transform 0.15s ease,
-    opacity 0.2s ease;
 }
 
-.nav:hover:not(:disabled) {
-  background: #ffffff;
-}
-
-.nav:active:not(:disabled) {
-  transform: translateY(-50%) scale(0.96);
-}
+.nav.prev { left: -30px; }
+.nav.next { right: -30px; }
 
 .nav:disabled {
   opacity: 0.3;
-  cursor: default;
-}
-
-.nav.prev {
-  left: -32px;
-}
-
-.nav.next {
-  right: -32px;
 }
 
 /* ================================
-   COUNTER — КРУПНЫЙ, ЯСНЫЙ
+   COUNTER
 ================================ */
 .counter {
-  margin-top: 26px;
+  margin-top: 24px;
   text-align: center;
 
-  font-size: 32px;      /* ⬅️ ЕЩЁ БОЛЬШЕ */
+  font-size: 32px;
   font-weight: 900;
   letter-spacing: 0.18em;
-  text-transform: uppercase;
 
   opacity: 0.75;
 }
@@ -214,19 +182,9 @@ body {
 /* ================================
    RESPONSIVE — БОЛЬШОЙ BREAKPOINT
 ================================ */
-@media (max-width: 1200px) {
+@media (max-width: 1400px) {
   .comic {
-    max-width: 100vw;
-  }
-
-  .comic-stack {
-    height: 92vh;
-    max-height: none;
-  }
-
-  .nav {
-    padding: 22px 48px;
-    font-size: 28px;
+    max-width: 100vw; /* ⬅️ НА МОБИЛКЕ РАСТЁМ ТОЛЬКО В ШИРИНУ */
   }
 
   .counter {
