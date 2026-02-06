@@ -98,38 +98,3 @@ comic.addEventListener('touchend', e => {
   if (dx > 40) goPrev();
   startX = null;
 });
-
-// ---------- MICRO PARALLAX ----------
-stack.addEventListener('mousemove', e => {
-  const rect = stack.getBoundingClientRect();
-  const px = (e.clientX - rect.left) / rect.width - 0.5;
-  const py = (e.clientY - rect.top) / rect.height - 0.5;
-
-  const page = pages[index];
-  if (!page) return;
-
-  gsap.to(page, {
-    rotateY: px * 8,
-    rotateX: -py * 6,
-    x: px * 6,
-    y: py * 6,
-    duration: 0.4,
-    ease: 'power2.out'
-  });
-});
-
-stack.addEventListener('mouseleave', () => {
-  const page = pages[index];
-  if (!page) return;
-
-  gsap.to(page, {
-    rotateX: 0,
-    rotateY: 0,
-    x: 0,
-    y: 0,
-    duration: 0.5,
-    ease: 'power3.out'
-  });
-});
-
-updateUI();
